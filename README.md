@@ -31,7 +31,7 @@ Example use case: Async periodic task
 Usage:
 
 ```ts
-import { AsyncInterval } from "@asanrom/async-tools";ç
+import { AsyncInterval } from "@asanrom/async-tools";
 
 const interval = new AsyncInterval(async function () {
     await doSomethingAsync();
@@ -47,7 +47,53 @@ interval.on("error", error => {
 interval.start(); // Start the interval
 
 interval.stop(); // Stops / Clears the interval
+```
 
+## Async Queue
+
+Queue with an async item handler.
+
+ - Items are handled in order (FIFO)
+ - If the handler is an async function, it waits for it to finish before dispatching the next item
+
+Usage:
+
+```ts
+import { AsyncQueue } from "@asanrom/async-tools";
+
+const queue = new AsyncQueue(
+    MAX_SIZE, // Max size of the queue or 0 for unlimited size
+    async function (item) { // Item handler
+        await doSomethingAsync(item)
+    }
+);
+
+queue.on("error", error => {
+    // If the promise is rejected it will emit
+    // and error event. If you want the queue to continue
+    // when this happens, you have to assign an error handler
+    console.error(error);
+});
+
+const items = [1, 2, 3, 4];
+items.forEach(item => {
+    // Use push(item) to push items to the queue
+    // They will be dispatched automatically
+    // Push will return false if the item was dropped
+    queue.push(item);
+});
+
+// We can check the size of the queue (number of items in it)
+queue.getCurrentSize();
+
+// Also we can check if it's full
+queue.isFull();
+
+// If we want to release the resources of the queue
+// we can call destroy()
+// It returns a promise that waits if there is an item
+// in the mid of being handled
+await queue.destroy();
 ```
 
 ## Documentation

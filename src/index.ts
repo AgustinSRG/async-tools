@@ -4,3 +4,4 @@
 "use strict";
 
 export * from "./async-interval";
+export * from "./async-queue";

@@ -24,7 +24,9 @@ describe("Async Interval", () => {
                 try {
                     expect(Date.now()).to.be.greaterThanOrEqual(start + (100 * counter));
                 } catch (e) {
+                    interval.stop();
                     reject(e);
+                    return;
                 }
                 
                 await waitMs(50);
@@ -33,6 +35,7 @@ describe("Async Interval", () => {
                     interval.stop();
                     resolve();
                 } else if (counter === 2) {
+                    // Throw test exception to check if interval continues
                     throw new Error("Test exception");
                 }
             }, 100);
@@ -49,7 +52,13 @@ describe("Async Interval", () => {
             let start = Date.now();
 
             const interval = new AsyncInterval(async () => {
-                expect(Date.now()).to.be.greaterThanOrEqual(start + (100 * counter));
+                try {
+                    expect(Date.now()).to.be.greaterThanOrEqual(start + (100 * counter));
+                } catch (e) {
+                    interval.stop();
+                    reject(e);
+                    return;
+                }
 
                 counter++;
 
@@ -59,6 +68,7 @@ describe("Async Interval", () => {
                     interval.stop();
                     resolve();
                 } else if (counter === 2) {
+                    // Throw test exception to check if interval continues
                     throw new Error("Test exception");
                 }
             }, 100);
