@@ -37,6 +37,13 @@ const interval = new AsyncInterval(async function () {
     await doSomethingAsync();
 }, 1000 /* Milliseconds */);
 
+interval.on("error", error => {
+    // If the promise is rejected it will emit
+    // and error event. If you want the interval to continue
+    // when this happens, you have to assign an error handler
+    console.error(error);
+});
+
 interval.start(); // Start the interval
 
 interval.stop(); // Stops / Clears the interval

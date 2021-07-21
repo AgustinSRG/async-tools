@@ -37,7 +37,7 @@ describe("Async Interval", () => {
                 }
             }, 100);
 
-            interval.addListener("error", err => {});
+            interval.on("error", err => {});
 
             interval.start();
         });
@@ -63,7 +63,7 @@ describe("Async Interval", () => {
                 }
             }, 100);
 
-            interval.addListener("error", err => {});
+            interval.on("error", err => {});
             interval.start(true);
         });
     });
