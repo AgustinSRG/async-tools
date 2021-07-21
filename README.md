@@ -22,6 +22,27 @@ If you are using it in the browser, download the minified file from the [Release
 
 The browser library exports all artifacts to the window global: `AsyncTools`
 
+## Async Interval
+
+Interval that waits for the async function to end before runnng it again. Prevent multiple simultaneous executions.
+
+Example use case: Async periodic task
+
+Usage:
+
+```ts
+import { AsyncInterval } from "@asanrom/async-tools";ç
+
+const interval = new AsyncInterval(async function () {
+    await doSomethingAsync();
+}, 1000 /* Milliseconds */);
+
+interval.start(); // Start the interval
+
+interval.stop(); // Stops / Clears the interval
+
+```
+
 ## Documentation
 
  - [Library documentation (Auto-generated)](https://agustinsrg.github.io/async-tools/)
