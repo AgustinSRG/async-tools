@@ -96,6 +96,32 @@ queue.isFull();
 await queue.destroy();
 ```
 
+## Async Semaphore
+
+Semaphore to create critical sections on async functions.
+
+Usage:
+
+```ts
+import { AsyncSemaphore } from "@asanrom/async-tools";
+
+
+const sem = new AsyncSemaphore(); // Without params, initial instances is 1 (Mutex)
+const sem3Instances = new AsyncSemaphore(3); // 3 initial instances
+
+// Acquire instances, if it can't acquire
+// the promise will resolve when the instances are available
+// it will reject if the semaphore is destroyed
+await sem.acquire();
+
+// Release instances and resolve the promises
+sem.release();
+
+// Rejects all promises waiting to acquire the semaphore
+// After destroyed, it cannot be used anymore
+sem.destroy();
+```
+
 ## Documentation
 
  - [Library documentation (Auto-generated)](https://agustinsrg.github.io/async-tools/)
