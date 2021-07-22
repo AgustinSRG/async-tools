@@ -1,0 +1,220 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@asanrom/async-tools</title>
+	<meta name="description" content="Documentation for @asanrom/async-tools">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@asanrom/async-tools</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>@asanrom/async-tools</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#async-tools" id="async-tools" style="color: inherit; text-decoration: none;">
+					<h1>Async tools</h1>
+				</a>
+				<p><a href="https://badge.fury.io/js/%40asanrom%2Fasync-tools"><img src="https://badge.fury.io/js/%40asanrom%2Fasync-tools.svg" alt="npm version"></a>
+					<a href="https://david-dm.org/AgustinSRG/async-tools"><img src="https://david-dm.org/AgustinSRG/async-tools.svg" alt="Dependency Status"></a>
+				<a href="https://david-dm.org/AgustinSRG/async-tools?type=dev"><img src="https://david-dm.org/AgustinSRG/async-tools/dev-status.svg" alt="devDependency Status"></a></p>
+				<p>Collection of tools to work with async funcions in javascript.</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<p>If you are using a npm managed project use:</p>
+				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> @</span><span style="color: #001080">asanrom</span><span style="color: #000000">/</span><span style="color: #001080">async</span><span style="color: #000000">-</span><span style="color: #001080">tools</span>
+</code></pre>
+				<p>If you are using it in the browser, download the minified file from the <a href="https://github.com/AgustinSRG/async-tools/tags">Releases</a> section and import it to your html:</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;text/javascript&quot;</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;/path/to/async-tools.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+</code></pre>
+				<p>The browser library exports all artifacts to the window global: <code>AsyncTools</code></p>
+				<a href="#async-interval" id="async-interval" style="color: inherit; text-decoration: none;">
+					<h2>Async Interval</h2>
+				</a>
+				<p>Interval that waits for the async function to end before runnng it again. Prevent multiple simultaneous executions.</p>
+				<p>Example use case: Async periodic task</p>
+				<p>Usage:</p>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">AsyncInterval</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@asanrom/async-tools&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">interval</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">AsyncInterval</span><span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> () {</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">doSomethingAsync</span><span style="color: #000000">();</span>
+<span style="color: #000000">}, </span><span style="color: #098658">1000</span><span style="color: #000000"> </span><span style="color: #008000">/* Milliseconds */</span><span style="color: #000000">);</span>
+
+<span style="color: #001080">interval</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;error&quot;</span><span style="color: #000000">, </span><span style="color: #001080">error</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #008000">// If the promise is rejected it will emit</span>
+<span style="color: #000000">    </span><span style="color: #008000">// and error event. If you want the interval to continue</span>
+<span style="color: #000000">    </span><span style="color: #008000">// when this happens, you have to assign an error handler</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #001080">error</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #001080">interval</span><span style="color: #000000">.</span><span style="color: #795E26">start</span><span style="color: #000000">(); </span><span style="color: #008000">// Start the interval</span>
+
+<span style="color: #001080">interval</span><span style="color: #000000">.</span><span style="color: #795E26">stop</span><span style="color: #000000">(); </span><span style="color: #008000">// Stops / Clears the interval</span>
+</code></pre>
+				<a href="#async-queue" id="async-queue" style="color: inherit; text-decoration: none;">
+					<h2>Async Queue</h2>
+				</a>
+				<p>Queue with an async item handler.</p>
+				<ul>
+					<li>Items are handled in order (FIFO)</li>
+					<li>If the handler is an async function, it waits for it to finish before dispatching the next item</li>
+				</ul>
+				<p>Usage:</p>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">AsyncQueue</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@asanrom/async-tools&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">queue</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">AsyncQueue</span><span style="color: #000000">(</span>
+<span style="color: #000000">    </span><span style="color: #0070C1">MAX_SIZE</span><span style="color: #000000">, </span><span style="color: #008000">// Max size of the queue or 0 for unlimited size</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> (</span><span style="color: #001080">item</span><span style="color: #000000">) { </span><span style="color: #008000">// Item handler</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">doSomethingAsync</span><span style="color: #000000">(</span><span style="color: #001080">item</span><span style="color: #000000">)</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">);</span>
+
+<span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">on</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;error&quot;</span><span style="color: #000000">, </span><span style="color: #001080">error</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #008000">// If the promise is rejected it will emit</span>
+<span style="color: #000000">    </span><span style="color: #008000">// and error event. If you want the queue to continue</span>
+<span style="color: #000000">    </span><span style="color: #008000">// when this happens, you have to assign an error handler</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #001080">error</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">items</span><span style="color: #000000"> = [</span><span style="color: #098658">1</span><span style="color: #000000">, </span><span style="color: #098658">2</span><span style="color: #000000">, </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #098658">4</span><span style="color: #000000">];</span>
+<span style="color: #001080">items</span><span style="color: #000000">.</span><span style="color: #795E26">forEach</span><span style="color: #000000">(</span><span style="color: #001080">item</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #008000">// Use push(item) to push items to the queue</span>
+<span style="color: #000000">    </span><span style="color: #008000">// They will be dispatched automatically</span>
+<span style="color: #000000">    </span><span style="color: #008000">// Push will return false if the item was dropped</span>
+<span style="color: #000000">    </span><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">push</span><span style="color: #000000">(</span><span style="color: #001080">item</span><span style="color: #000000">);</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #008000">// We can check the size of the queue (number of items in it)</span>
+<span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">getCurrentSize</span><span style="color: #000000">();</span>
+
+<span style="color: #008000">// Also we can check if it&#039;s full</span>
+<span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">isFull</span><span style="color: #000000">();</span>
+
+<span style="color: #008000">// If we want to release the resources of the queue</span>
+<span style="color: #008000">// we can call destroy()</span>
+<span style="color: #008000">// It returns a promise that waits if there is an item</span>
+<span style="color: #008000">// in the mid of being handled</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">queue</span><span style="color: #000000">.</span><span style="color: #795E26">destroy</span><span style="color: #000000">();</span>
+</code></pre>
+				<a href="#async-semaphore" id="async-semaphore" style="color: inherit; text-decoration: none;">
+					<h2>Async Semaphore</h2>
+				</a>
+				<p>Semaphore to create critical sections on async functions.</p>
+				<p>Usage:</p>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">AsyncSemaphore</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@asanrom/async-tools&quot;</span><span style="color: #000000">;</span>
+
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sem</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">AsyncSemaphore</span><span style="color: #000000">(); </span><span style="color: #008000">// Without params, initial instances is 1 (Mutex)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sem3Instances</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">AsyncSemaphore</span><span style="color: #000000">(</span><span style="color: #098658">3</span><span style="color: #000000">); </span><span style="color: #008000">// 3 initial instances</span>
+
+<span style="color: #008000">// Acquire instances, if it can&#039;t acquire</span>
+<span style="color: #008000">// the promise will resolve when the instances are available</span>
+<span style="color: #008000">// it will reject if the semaphore is destroyed</span>
+<span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">sem</span><span style="color: #000000">.</span><span style="color: #795E26">acquire</span><span style="color: #000000">();</span>
+
+<span style="color: #008000">// Release instances and resolve the promises</span>
+<span style="color: #001080">sem</span><span style="color: #000000">.</span><span style="color: #795E26">release</span><span style="color: #000000">();</span>
+
+<span style="color: #008000">// Rejects all promises waiting to acquire the semaphore</span>
+<span style="color: #008000">// After destroyed, it cannot be used anymore</span>
+<span style="color: #001080">sem</span><span style="color: #000000">.</span><span style="color: #795E26">destroy</span><span style="color: #000000">();</span>
+</code></pre>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h2>Documentation</h2>
+				</a>
+				<ul>
+					<li><a href="https://agustinsrg.github.io/async-tools/">Library documentation (Auto-generated)</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/async_interval.html">async-<wbr>interval</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/async_queue.html">async-<wbr>queue</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/async_semaphore.html">async-<wbr>semaphore</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/index.html">index</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
