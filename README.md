@@ -1,8 +1,6 @@
 # Async tools
 
 [![npm version](https://badge.fury.io/js/%40asanrom%2Fasync-tools.svg)](https://badge.fury.io/js/%40asanrom%2Fasync-tools)
-[![Dependency Status](https://david-dm.org/AgustinSRG/async-tools.svg)](https://david-dm.org/AgustinSRG/async-tools)
-[![devDependency Status](https://david-dm.org/AgustinSRG/async-tools/dev-status.svg)](https://david-dm.org/AgustinSRG/async-tools?type=dev)
 
 Collection of tools to work with async funcions in javascript.
 

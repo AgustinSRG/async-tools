@@ -13,21 +13,12 @@ function waitMs(ms: number): Promise<void> {
 
 describe("Async Interval", () => {
 
-    it('Timing test', () => {
+    it('Basic test', () => {
         return new Promise<void>((resolve, reject) => {
             let counter = 0;
-            let start = Date.now();
 
             const interval = new AsyncInterval(async () => {
                 counter++;
-
-                try {
-                    expect(Date.now()).to.be.greaterThanOrEqual(start + (100 * counter));
-                } catch (e) {
-                    interval.stop();
-                    reject(e);
-                    return;
-                }
                 
                 await waitMs(50);
 
@@ -38,7 +29,7 @@ describe("Async Interval", () => {
                     // Throw test exception to check if interval continues
                     throw new Error("Test exception");
                 }
-            }, 100);
+            }, 50);
 
             interval.on("error", err => {});
 
@@ -46,20 +37,11 @@ describe("Async Interval", () => {
         });
     });
 
-    it('Timing test (with first run)', () => {
+    it('Test with first run immediately', () => {
         return new Promise<void>((resolve, reject) => {
             let counter = 0;
-            let start = Date.now();
 
             const interval = new AsyncInterval(async () => {
-                try {
-                    expect(Date.now()).to.be.greaterThanOrEqual(start + (100 * counter));
-                } catch (e) {
-                    interval.stop();
-                    reject(e);
-                    return;
-                }
-
                 counter++;
 
                 await waitMs(50);
@@ -71,7 +53,7 @@ describe("Async Interval", () => {
                     // Throw test exception to check if interval continues
                     throw new Error("Test exception");
                 }
-            }, 100);
+            }, 50);
 
             interval.on("error", err => {});
             interval.start(true);
