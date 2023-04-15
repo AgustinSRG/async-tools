@@ -5,7 +5,7 @@
 import { EventEmitter } from "events";
 
 /**
- * Interval that waits for async funcions to complete
+ * Interval that waits for async functions to complete
  */
 export class AsyncInterval extends EventEmitter {
     public interval: NodeJS.Timeout;

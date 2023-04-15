@@ -6,18 +6,18 @@ import { EventEmitter } from "events";
 
 /**
  * Async queue
- * Handles each item with an async funcion
- * Waits for the funcion to end before handling the next item
+ * Handles each item with an async function
+ * Waits for the function to end before handling the next item
  * Allows a max size setting
  */
-export class AsyncQueue extends EventEmitter {
+export class AsyncQueue<T = any> extends EventEmitter {
 
     // Config
     private size: number;
-    private dispatchFunc: (t: any) => any;
+    private dispatchFunc: (t: T) => any;
 
     // Status
-    private array: any[];
+    private array: T[];
     private waiting: boolean;
     private toResolve: () => any;
     private destroyed: boolean;
@@ -27,7 +27,7 @@ export class AsyncQueue extends EventEmitter {
      * @param size Max size of the queue. Set to 0 for no size limit.
      * @param dispatchFunc Dispatch function
      */
-    constructor(size: number, dispatchFunc: (t: any) => any) {
+    constructor(size: number, dispatchFunc: (t: T) => any) {
         super();
 
         this.array = [];
@@ -62,7 +62,7 @@ export class AsyncQueue extends EventEmitter {
      * @param item The item
      * @returns true if it was added, false if it was dropped
      */
-    public push(item: any): boolean {
+    public push(item: T): boolean {
         if (this.destroyed) {
             this.emit('error', new Error("Push() was called after the queue was destroyed"));
             return;
@@ -96,13 +96,13 @@ export class AsyncQueue extends EventEmitter {
         this.dispatchFunc = async function () { };
 
         // Wait if there is an item running
-        return new Promise<void>(function (resolve) {
+        return new Promise<void>(resolve => {
             if (this.waiting) {
                 resolve();
             } else {
                 this.toResolve = resolve;
             }
-        }.bind(this));
+        });
     }
 
     private dispatchNext() {
@@ -118,10 +118,10 @@ export class AsyncQueue extends EventEmitter {
 
             if (result instanceof Promise) {
                 result.then(this.dispatchNext.bind(this))
-                    .catch(function (err: Error) {
+                    .catch(err => {
                         this.emit('error', err);
                         this.dispatchNext();
-                    }.bind(this));
+                    })
             } else {
                 this.dispatchNext();
             }
