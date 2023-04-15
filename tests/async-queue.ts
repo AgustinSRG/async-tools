@@ -16,7 +16,7 @@ describe("Async Queue", () => {
         let items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
         return new Promise<void>((resolve, reject) => {
-            const q: AsyncQueue = new AsyncQueue(0, async (item) => {
+            const q: AsyncQueue = new AsyncQueue<number>(0, async (item) => {
                 if (items[counter] !== item) {
                     q.destroy();
                     return reject(new Error(`Expected ${items[counter]} but found ${item}`));
@@ -46,7 +46,7 @@ describe("Async Queue", () => {
         let items = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
         return new Promise<void>((resolve, reject) => {
-            const q: AsyncQueue = new AsyncQueue(0, async (item) => {
+            const q: AsyncQueue = new AsyncQueue<number>(0, async (item) => {
                 if (items[counter] !== item) {
                     q.destroy();
                     return reject(new Error(`Expected ${items[counter]} but found ${item}`));
@@ -77,7 +77,7 @@ describe("Async Queue", () => {
         let destroyed = false;
 
         return new Promise<void>((resolve, reject) => {
-            const q: AsyncQueue = new AsyncQueue(0, async (item) => {
+            const q: AsyncQueue = new AsyncQueue<number>(0, async (item) => {
                 if (destroyed) {
                     reject(new Error("Item handled after destroy"));
                     return;
@@ -110,7 +110,7 @@ describe("Async Queue", () => {
         let destroyed = false;
 
         return new Promise<void>((resolve, reject) => {
-            const q: AsyncQueue = new AsyncQueue(5, async (item) => {
+            const q: AsyncQueue = new AsyncQueue<number>(5, async (item) => {
                 if (destroyed) {
                     reject(new Error("Item handled after destroy"));
                     return;
@@ -141,5 +141,4 @@ describe("Async Queue", () => {
             });
         });
     });
-
 });

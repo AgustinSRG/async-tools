@@ -10,7 +10,7 @@ interface Waiter {
 
 /**
  * Async semaphore
- * To create critical sections of async funcions
+ * To create critical sections of async functions
  */
 export class AsyncSemaphore {
     // Free Instances
@@ -52,14 +52,14 @@ export class AsyncSemaphore {
             // Can be adquired
             this.instances -= instances;
         } else {
-            return new Promise<void>(function (resolve, reject) {
+            return new Promise<void>((resolve, reject) => {
                 // Add to queue
                 this.waiting.push({
                     requiredInstances: instances,
                     resolve: resolve,
                     reject: reject,
                 })
-            }.bind(this));
+            });
         }
     }
 
