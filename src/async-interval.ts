@@ -17,11 +17,11 @@ export declare interface AsyncInterval {
  * Interval that waits for async functions to complete
  */
 export class AsyncInterval extends EventEmitter {
-    public interval: NodeJS.Timeout;
-    public busy: boolean;
+    private interval: NodeJS.Timeout;
+    private busy: boolean;
 
-    public ms: number;
-    public func: () => any;
+    private ms: number;
+    private func: () => any;
 
     /**
      * Constructor
