@@ -4,6 +4,15 @@
 
 import { EventEmitter } from "events";
 
+export declare interface AsyncInterval {
+    /**
+     * Adds error event handler
+     * @param eventName Event name
+     * @param handlerFunc Handler function
+     */
+    on(eventName: "error", handlerFunc: (err: Error) => void): this;
+}
+
 /**
  * Interval that waits for async functions to complete
  */

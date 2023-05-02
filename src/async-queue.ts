@@ -4,6 +4,22 @@
 
 import { EventEmitter } from "events";
 
+export declare interface AsyncQueue<T = any> {
+    /**
+     * Adds error event handler
+     * @param eventName Event name
+     * @param handlerFunc Handler function
+     */
+    on(eventName: "error", handlerFunc: (err: Error) => void): this;
+
+    /**
+     * Adds item dropped event handler
+     * @param eventName Event name
+     * @param handlerFunc Handler function
+     */
+    on(eventName: "item-drop", handlerFunc: (item: T) => void): this;
+}
+
 /**
  * Async queue
  * Handles each item with an async function
