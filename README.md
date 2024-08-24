@@ -120,6 +120,50 @@ sem.release();
 sem.destroy();
 ```
 
+## Async Provider
+
+Provides values asynchronously, allowing a function to await the value while other function eventually provides the value.
+
+It also provides a timeout option to set a max time to wait for the value.
+
+Usage:
+
+```ts
+import { AsyncProvider } from "@asanrom/async-tools";
+
+// Create a provider
+const provider = new AsyncProvider(2000 /* Timeout in milliseconds as the constructor argument */);
+
+server.on("message", msg => {
+    // You can asynchronously provide a value.
+    // For example, when an event is received
+    provider.provideValue(msg);
+});
+
+
+server.on("error", err => {
+    // You can also asynchronously provide an error
+    provider.provideError(err);
+});
+
+try {
+    // You can await for the value
+    // The promise will be resolved if 'provideValue' is called on time
+    // The promise will reject if the timeout is reached or 'provideError' is called
+    const value = await provider.getValue();
+
+    console.log("Value: " + value);
+} catch (ex) {
+    if (AsyncProvider.isTimeoutError(ex)) { // Check if the error is a timeout error
+        // Timeout error
+        console.error("The value was not provided in time!");
+    } else {
+        // Provided error
+        console.error(ex);
+    }
+}
+```
+
 ## Documentation
 
  - [Library documentation (Auto-generated)](https://agustinsrg.github.io/async-tools/)
