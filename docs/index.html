@@ -17,7 +17,7 @@
   <h1>Async tools</h1>
 </a>
 <p><a href="https://badge.fury.io/js/%40asanrom%2Fasync-tools"><img src="https://badge.fury.io/js/%40asanrom%2Fasync-tools.svg" alt="npm version"></a></p>
-<p>Collection of tools to work with async funcions in javascript.</p>
+<p>Collection of tools to work with async functions in javascript.</p>
 
 <a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
   <h2>Installation</h2>
@@ -33,7 +33,7 @@
 <a href="#async-interval" id="async-interval" style="color: inherit; text-decoration: none;">
   <h2>Async Interval</h2>
 </a>
-<p>Interval that waits for the async function to end before runnng it again. Prevent multiple simultaneous executions.</p>
+<p>Interval that waits for the async function to end before running it again. Prevent multiple simultaneous executions.</p>
 <p>Example use case: Async periodic task</p>
 <p>Usage:</p>
 <pre><code class="language-ts"><span class="hl-7">import</span><span class="hl-1"> { </span><span class="hl-0">AsyncInterval</span><span class="hl-1"> } </span><span class="hl-7">from</span><span class="hl-1"> </span><span class="hl-8">&quot;@asanrom/async-tools&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-9">const</span><span class="hl-1"> </span><span class="hl-10">interval</span><span class="hl-1"> = </span><span class="hl-9">new</span><span class="hl-1"> </span><span class="hl-11">AsyncInterval</span><span class="hl-1">(</span><span class="hl-9">async</span><span class="hl-1"> </span><span class="hl-9">function</span><span class="hl-1"> () {</span><br/><span class="hl-1">    </span><span class="hl-7">await</span><span class="hl-1"> </span><span class="hl-11">doSomethingAsync</span><span class="hl-1">();</span><br/><span class="hl-1">}, </span><span class="hl-12">1000</span><span class="hl-1"> </span><span class="hl-13">/* Milliseconds */</span><span class="hl-1">);</span><br/><br/><span class="hl-0">interval</span><span class="hl-1">.</span><span class="hl-11">on</span><span class="hl-1">(</span><span class="hl-8">&quot;error&quot;</span><span class="hl-1">, </span><span class="hl-0">error</span><span class="hl-1"> </span><span class="hl-9">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-13">// If the promise is rejected it will emit</span><br/><span class="hl-1">    </span><span class="hl-13">// and error event. If you want the interval to continue</span><br/><span class="hl-1">    </span><span class="hl-13">// when this happens, you have to assign an error handler</span><br/><span class="hl-1">    </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-11">error</span><span class="hl-1">(</span><span class="hl-0">error</span><span class="hl-1">);</span><br/><span class="hl-1">});</span><br/><br/><span class="hl-0">interval</span><span class="hl-1">.</span><span class="hl-11">start</span><span class="hl-1">(); </span><span class="hl-13">// Start the interval</span><br/><br/><span class="hl-0">interval</span><span class="hl-1">.</span><span class="hl-11">stop</span><span class="hl-1">(); </span><span class="hl-13">// Stops / Clears the interval</span>
