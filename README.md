@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/%40asanrom%2Fasync-tools.svg)](https://badge.fury.io/js/%40asanrom%2Fasync-tools)
 
-Collection of tools to work with async funcions in javascript.
+Collection of tools to work with async functions in javascript.
 
 ## Installation
 
@@ -22,7 +22,7 @@ The browser library exports all artifacts to the window global: `AsyncTools`
 
 ## Async Interval
 
-Interval that waits for the async function to end before runnng it again. Prevent multiple simultaneous executions.
+Interval that waits for the async function to end before running it again. Prevent multiple simultaneous executions.
 
 Example use case: Async periodic task
 
