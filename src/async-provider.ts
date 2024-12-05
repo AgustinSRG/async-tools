@@ -115,6 +115,14 @@ export class AsyncProvider<T = any> {
     }
 
     /**
+     * Checks if the provider is done
+     * @returns True if the value or error was already provided
+     */
+    public isDone(): boolean {
+        return this.done;
+    }
+
+    /**
      * Resets the provider, setting it to the same status it was after constructing it
      */
     public reset() {
