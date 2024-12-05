@@ -1,6 +1,6 @@
 {
   "name": "@asanrom/async-tools",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Collection of tools to work with async functions.",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
